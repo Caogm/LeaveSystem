@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leavesystem.mapper.LeaveTableMapper" >
+  <resultMap id="BaseResultMap" type="com.leavesystem.model.LeaveTable" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="upost" property="upost" jdbcType="VARCHAR" />
+    <result column="usys" property="usys" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="leavetype" property="leavetype" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="leavetime" property="leavetime" jdbcType="VARCHAR" />
+    <result column="backtime" property="backtime" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, uid, uname, upost, usys, phone, leavetype, reason, leavetime, backtime, createtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leavesystem.model.LeaveTableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from leave_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from leave_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="queryByKeyWords" parameterType="com.leavesystem.model.LeaveTableExample">
+  	select * from leave_table where reason like '%' #{reason} '%' and leavetype = #{leavetype}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from leave_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.leavesystem.model.LeaveTableExample" >
+    delete from leave_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.leavesystem.model.LeaveTable" >
+    insert into leave_table (id, uid, uname, 
+      upost, usys, phone, 
+      leavetype, reason, leavetime, 
+      backtime, createtime)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, 
+      #{upost,jdbcType=VARCHAR}, #{usys,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{leavetype,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{leavetime,jdbcType=VARCHAR}, 
+      #{backtime,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.leavesystem.model.LeaveTable" >
+    insert into leave_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="upost != null" >
+        upost,
+      </if>
+      <if test="usys != null" >
+        usys,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="leavetype != null" >
+        leavetype,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="leavetime != null" >
+        leavetime,
+      </if>
+      <if test="backtime != null" >
+        backtime,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upost != null" >
+        #{upost,jdbcType=VARCHAR},
+      </if>
+      <if test="usys != null" >
+        #{usys,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetype != null" >
+        #{leavetype,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetime != null" >
+        #{leavetime,jdbcType=VARCHAR},
+      </if>
+      <if test="backtime != null" >
+        #{backtime,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.leavesystem.model.LeaveTableExample" resultType="java.lang.Integer" >
+    select count(*) from leave_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update leave_table
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uname != null" >
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upost != null" >
+        upost = #{record.upost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usys != null" >
+        usys = #{record.usys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leavetype != null" >
+        leavetype = #{record.leavetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leavetime != null" >
+        leavetime = #{record.leavetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backtime != null" >
+        backtime = #{record.backtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update leave_table
+    set id = #{record.id,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      upost = #{record.upost,jdbcType=VARCHAR},
+      usys = #{record.usys,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      leavetype = #{record.leavetype,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      leavetime = #{record.leavetime,jdbcType=VARCHAR},
+      backtime = #{record.backtime,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.leavesystem.model.LeaveTable" >
+    update leave_table
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upost != null" >
+        upost = #{upost,jdbcType=VARCHAR},
+      </if>
+      <if test="usys != null" >
+        usys = #{usys,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetype != null" >
+        leavetype = #{leavetype,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetime != null" >
+        leavetime = #{leavetime,jdbcType=VARCHAR},
+      </if>
+      <if test="backtime != null" >
+        backtime = #{backtime,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.leavesystem.model.LeaveTable" >
+    update leave_table
+    set uid = #{uid,jdbcType=VARCHAR},
+      uname = #{uname,jdbcType=VARCHAR},
+      upost = #{upost,jdbcType=VARCHAR},
+      usys = #{usys,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      leavetype = #{leavetype,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      leavetime = #{leavetime,jdbcType=VARCHAR},
+      backtime = #{backtime,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
