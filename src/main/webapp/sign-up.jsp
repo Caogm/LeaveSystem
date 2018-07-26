@@ -49,26 +49,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <span class="tpl-login-content-info">
                   	创建一个新的用户
               </span>
-                <form class="am-form tpl-form-line-form" action="userController/register"  name="actionForm" id="actionForm"  method="post">
+                <form class="am-form tpl-form-line-form" action="actIdUserController/register"  name="actionForm" id="actionForm"  method="post">
                     <div class="am-form-group">
-                        <input type="text" class="tpl-form-input" id="user-name" name="name" placeholder="请输入用户名" required>
+                        <input type="text" class="tpl-form-input" id="user-name" name="id" placeholder="请输入用户名" required>
                     </div>
 
                     <div class="am-form-group">
-                        <input type="password" class="tpl-form-input" id="user-name" name="pass" placeholder="请输入密码" required>
+                        <input type="password" class="tpl-form-input" id="user-name" name="pwd" placeholder="请输入密码" required>
                     </div>
 
                     <div class="am-form-group">
-                        <input type="password" class="tpl-form-input" id="user-name" name="repass" placeholder="再次输入密码" required>
+                        <input type="password" class="tpl-form-input" id="user-name" name="repwd" placeholder="再次输入密码" required>
                     </div>
 
-                    <div class="am-form-group">
+                    <!-- <div class="am-form-group">
                         <input type="text" class="tpl-form-input" id="user-name" name="post" placeholder="请输入岗位" required>
                     </div>
                     
       				<div class="am-form-group">
                         <input type="text" class="tpl-form-input" id="user-name" name="system" placeholder="请输入部门" required>
-                    </div>
+                    </div> -->
                     
                     <div class="am-form-group">
                         <input type="text" class="tpl-form-input" id="user-name" name="email" placeholder="请输入邮箱" required>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%    
 String path = request.getContextPath();    
 // 获得项目完全路径（假设你的项目叫MyApp，那么获得到的地址就是 http://localhost:8080/MyApp/）:    
@@ -12,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href=" <%=basePath%>">   
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>500报错页面</title>
+    <title>请假系统-后台管理</title>
     <meta name="description" content="这是一个 index 页面">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="assets/css/app.css">
     <script src="assets/js/jquery.min.js"></script>
 </head>
-<body data-type="widgets">
+
+<body data-type="index">
     <script src="assets/js/theme.js"></script>
     <div class="am-g tpl-g">
         <!-- 头部 -->
@@ -56,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <ul>
                         <!-- 欢迎语 -->
                         <li class="am-text-sm tpl-header-navbar-welcome">
-                            <a href="javascript:;">欢迎你, <span>Amaze UI</span> </a>
+                            <a href="javascript:;">欢迎你, <span>${user.name}</span> </a>
                         </li>
 
                         <!-- 新邮件 -->
@@ -97,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <div class="menu-messages-content">
                                             <div class="menu-messages-content-title">
                                                 <i class="am-icon-circle-o am-text-warning"></i>
-                                                <span>禁言小张</span>
+                                                <span>测试用户</span>
                                             </div>
                                             <div class="am-text-truncate"> 为了能最准确的传达所描述的问题， 建议你在反馈时附上演示，方便我们理解。 </div>
                                             <div class="menu-messages-content-time">2016-09-16 上午 09:23</div>
@@ -199,86 +202,121 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-              禁言小张
+           ${user.name}
           </span>
                     <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
                 </div>
             </div>
 
-
             <!-- 菜单 -->
             <ul class="sidebar-nav">
-                <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 附加组件</span></li>
+                <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 主要组件</span></li>
                 <li class="sidebar-nav-link">
-                    <a href="index.html">
+                    <a href="index.jsp" class="active">
                         <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
                     </a>
                 </li>
-                <li class="sidebar-nav-link">
-                    <a href="tables.html">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 表格
-                    </a>
-                </li>
-                <li class="sidebar-nav-link">
-                    <a href="calendar.html">
-                        <i class="am-icon-calendar sidebar-nav-link-logo"></i> 日历
-                    </a>
-                </li>
-                <li class="sidebar-nav-link">
-                    <a href="form.html">
-                        <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 表单
-
-                    </a>
-                </li>
-                <li class="sidebar-nav-link">
-                    <a href="chart.html">
-                        <i class="am-icon-bar-chart sidebar-nav-link-logo"></i> 图表
-
-                    </a>
-                </li>
-
                 <li class="sidebar-nav-heading">Page<span class="sidebar-nav-heading-info"> 常用页面</span></li>
-                <li class="sidebar-nav-link">
+                                <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 数据列表
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 流程管理
                         <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
-                            <a href="table-list.html">
-                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 文字列表
+                            <a href="processDeployManage.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 流程部署管理
                             </a>
                         </li>
-
                         <li class="sidebar-nav-link">
-                            <a href="table-list-img.html">
-                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图文列表
+                            <a href="processDefinitionManage.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 流程定义管理
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="sign-up.html">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 人员管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="user-list.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 用户管理
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="table-edit.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 用户权限管理
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 请假
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="table-list.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 请假单列表
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="table-edit.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 编辑请假单
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 审批
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="Unfinished-task.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 待办理任务
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="finished task.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 已办理任务
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="sign-up.jsp">
                         <i class="am-icon-clone sidebar-nav-link-logo"></i> 注册
                         <span class="am-badge am-badge-secondary sidebar-nav-link-logo-ico am-round am-fr am-margin-right-sm">6</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="login.html">
+                    <a href="login.jsp">
                         <i class="am-icon-key sidebar-nav-link-logo"></i> 登录
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="404.html" class="active">
+                    <a href="404.jsp">
+                        <i class="am-icon-tv sidebar-nav-link-logo"></i> 404错误
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="500.jsp">
                         <i class="am-icon-tv sidebar-nav-link-logo"></i> 500错误
                     </a>
                 </li>
-
             </ul>
         </div>
 
 
-
+  
         <!-- 内容区域 -->
         <div class="tpl-content-wrapper">
 

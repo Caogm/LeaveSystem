@@ -25,7 +25,8 @@
 	<c3p0.version>0.9.5.2</c3p0.version>
 	<!-- JSTL标签类 -->
 	<jstl.version>1.2</jstl.version>
-	
+	<!-- activiti版本号 -->
+	<activiti.version>5.22.0</activiti.version>
 	
 </properties>
   
@@ -101,6 +102,23 @@
 			<artifactId>javaee-api</artifactId>
 			<version>8.0</version>
 		</dependency>
+		<dependency>
+	      <groupId>net.sf.json-lib</groupId>
+	      <artifactId>json-lib</artifactId>
+	      <classifier>jdk15</classifier>
+	      <version>2.2.3</version>
+    	</dependency>
+    	<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-core-asl</artifactId>
+		    <version>1.9.13</version>
+		</dependency>
+    	<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-asl</artifactId>
+		    <version>1.9.13</version>
+		</dependency>
+		
     <!-- junit单元测试jar包 -->
     <dependency>
 		<groupId>junit</groupId>
@@ -146,6 +164,27 @@
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
       <version>1.10</version>
-  </dependency>
+  	</dependency>
+  	<!-- activiti -->
+      <dependency>
+          <groupId>org.activiti</groupId>
+          <artifactId>activiti-engine</artifactId>
+          <version>${activiti.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.activiti</groupId>
+          <artifactId>activiti-spring</artifactId>
+          <version>${activiti.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.activiti</groupId>
+          <artifactId>activiti-rest</artifactId>
+          <version>${activiti.version}</version>
+      </dependency>
+	  <dependency>
+	    <groupId>org.activiti</groupId>
+	    <artifactId>activiti-bpmn-model</artifactId>
+	    <version>${activiti.version}</version>
+	  </dependency>
   </dependencies>
 </project>

@@ -48,14 +48,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="tpl-login-content">
                 <div class="tpl-login-logo">
                 </div>
-                <form class="am-form tpl-form-line-form" action="userController/login" name="actionForm" id="actionForm" method="post">
-                    <div class="info">${error }</div>
-                    <div class="am-form-group">
+                <form class="am-form tpl-form-line-form" action="actIdUserController/login"  method="post">
+                    <div class="info">${error}</div>
                     <!-- input中的name的值是提交到表单的参数 -->
-                        <input type="text" class="tpl-form-input" id="user-name" name="name" placeholder="请输入账号" required>
+                    <div class="am-form-group">
+                        <input type="text" class="tpl-form-input" id="user-name" name="id" placeholder="请输入账号" required>
                     </div>
                     <div class="am-form-group">
-                        <input type="password" class="tpl-form-input" id="user-name" name="pass" placeholder="请输入密码" required>
+                        <input type="password" class="tpl-form-input" id="user-name" name="pwd" placeholder="请输入密码" required>
                     </div>
                     <div class="am-form-group tpl-login-remember-me">
                         <input id="remember-me" type="checkbox">

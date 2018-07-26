@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%    
 String path = request.getContextPath();    
 // 获得项目完全路径（假设你的项目叫MyApp，那么获得到的地址就是 http://localhost:8080/MyApp/）:    
@@ -13,8 +13,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- base需要放到head中 -->    
 	<base href=" <%=basePath%>">   
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>请假系统-后台管理</title>
+	 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>请假单列表</title>
     <meta name="description" content="这是一个 index 页面">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,8 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="assets/css/app.css">
     <script src="assets/js/jquery.min.js"></script>
 </head>
-
-<body data-type="index">
+<body data-type="widgets">
     <script src="assets/js/theme.js"></script>
     <div class="am-g tpl-g">
         <!-- 头部 -->
@@ -202,7 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-           ${user.name}
+            ${user.name}
           </span>
                     <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
                 </div>
@@ -315,30 +314,103 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </ul>
         </div>
 
-
-  
         <!-- 内容区域 -->
         <div class="tpl-content-wrapper">
-
-
-
             <div class="row-content am-cf">
-                <div class="widget am-cf">
-                    <div class="widget-body">
-                        <div class="tpl-page-state">
-                            <div class="tpl-page-state-title am-text-center tpl-error-title">404</div>
-                            <div class="tpl-error-title-info">Page Not Found</div>
-                            <div class="tpl-page-state-content tpl-error-content">
+                <div class="row">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <div class="widget am-cf">
+                            <div class="widget-head am-cf">
+                                <div class="widget-title  am-cf">请假单列表</div>
+                            </div>
+                            <div class="widget-body  am-fr">
+                                <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                                    <div class="am-form-group">
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <button type="button" class="am-btn am-btn-default am-btn-success" onclick="window.open('table-edit.jsp')"><span class="am-icon-plus"></span> 新增</button>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                                <form action="leaveTableController/queryLeaveTable" method="post">
+                                
+                                <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                                    <div class="am-form-group tpl-table-list-select">
+                                        <select name="leavetype" data-am-selected="{btnSize: 'sm'}">
+                                              <option value="option1">请假类型</option>
+                                              <option value="option2">年假</option>
+                                              <option value="option3">事假</option>
+                                              <option value="option3">病假</option>
+                                        </select>
+                                    </div>
+                                </div>
+                           
+                                
+                                <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                                    <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                        <input type="text" class="am-form-field " name="reason" value="">
+                                        <span class="am-input-group-btn">
+                                            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" type="submit"></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input type="submit">
+                                </form>
+                                
+                                <div class="am-u-sm-12">
+                                    <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
+                                        <thead>
+                                            <tr>
+                                                <th>请假原因</th>
+                                                <th>请假申请人</th>
+                                                <th>时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        	<c:forEach items="${leaveTablesList}" var="leaveTable">
+                                            <tr class="gradeX">
+                                                <td>${leaveTable.reason}</td>
+                                                <td>${leaveTable.uname}</td>
+                                                <td><fmt:formatDate value="${leaveTable.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                                <td>
+                                                    <div class="tpl-table-black-operation">
+                                                        <a href="leaveTableController/updateLeaveTable?id=${leaveTable.id}">
+                                                            <i class="am-icon-pencil"></i> 编辑
+                                                        </a>
+                                                        <a href="leaveTableController/deleteLeaveTable?id=${leaveTable.id}" class="tpl-table-black-operation-del">
+                                                            <i class="am-icon-trash"></i> 删除
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                           </c:forEach> 
+                                            <!-- more data -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="am-u-lg-12 am-cf">
 
-                                <p>对不起,没有找到您所需要的页面,可能是URL不确定,或者页面已被移除。</p>
-                                <button type="button" class="am-btn am-btn-secondary am-radius tpl-error-btn">Back Home</button></div>
-
+                                    <div class="am-fr">
+                                        <ul class="am-pagination tpl-pagination">
+                                            <li class="am-disabled"><a href="#">«</a></li>
+                                            <li class="am-active"><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">»</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>

@@ -207,56 +207,83 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             <!-- 菜单 -->
             <ul class="sidebar-nav">
-                <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 附加组件</span></li>
+                <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 主要组件</span></li>
                 <li class="sidebar-nav-link">
                     <a href="index.jsp" class="active">
                         <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
                     </a>
                 </li>
-                <!--<li class="sidebar-nav-link">
-                    <a href="tables.jsp">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 表格
-                    </a>
-                </li>
-                <li class="sidebar-nav-link">
-                    <a href="calendar.jsp">
-                        <i class="am-icon-calendar sidebar-nav-link-logo"></i> 日历
-                    </a>
-                </li>
-                <li class="sidebar-nav-link">
-                    <a href="form.jsp">
-                        <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 表单
-
-                    </a>
-                </li>
-                <li class="sidebar-nav-link">
-                    <a href="chart.jsp">
-                        <i class="am-icon-bar-chart sidebar-nav-link-logo"></i> 图表
-
-                    </a>
-                </li>-->
-
                 <li class="sidebar-nav-heading">Page<span class="sidebar-nav-heading-info"> 常用页面</span></li>
+                                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 流程管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="processDeployManage.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 流程部署管理
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="processDefinitionManage.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 流程定义管理
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 请假及审批
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 人员管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="user-list.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 用户管理
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="table-edit.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 用户权限管理
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 请假
                         <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
                             <a href="table-list.jsp">
-                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 填写请假单
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 请假单列表
                             </a>
                         </li>
                         <li class="sidebar-nav-link">
-                            <a href="table-list.jsp">
+                            <a href="table-edit.jsp">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 编辑请假单
                             </a>
                         </li>
 
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 审批
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
-                            <a href="table-list-img.jsp">
-                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图文列表
+                            <a href="Unfinished-task.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 待办理任务
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="finished task.jsp">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 已办理任务
                             </a>
                         </li>
                     </ul>
@@ -277,7 +304,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <i class="am-icon-tv sidebar-nav-link-logo"></i> 404错误
                     </a>
                 </li>
-
+                <li class="sidebar-nav-link">
+                    <a href="500.jsp">
+                        <i class="am-icon-tv sidebar-nav-link-logo"></i> 500错误
+                    </a>
+                </li>
             </ul>
         </div>
 
