@@ -1,73 +1,84 @@
 package com.leavesystem.model;
 
 public class ActIdUser {
-    private String id;
+	private String id;
 
-    private Integer rev;
+	private Integer rev;
 
-    private String first;
+	private String first;
 
-    private String last;
+	private String last;
 
-    private String email;
+	private String email;
 
-    private String pwd;
+	private String pwd;
 
-    private String pictureId;
+	private String pictureId;
 
-    public String getId() {
-        return id;
-    }
+	private String groups;
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+	public String getId() {
+		return id;
+	}
 
-    public Integer getRev() {
-        return rev;
-    }
+	public void setId(String id) {
+		this.id = id == null ? null : id.trim();
+	}
 
-    public void setRev(Integer rev) {
-        this.rev = rev;
-    }
+	public Integer getRev() {
+		return rev;
+	}
 
-    public String getFirst() {
-        return first;
-    }
+	public void setRev(Integer rev) {
+		this.rev = rev;
+	}
 
-    public void setFirst(String first) {
-        this.first = first == null ? null : first.trim();
-    }
+	public String getFirst() {
+		return first;
+	}
 
-    public String getLast() {
-        return last;
-    }
+	public void setFirst(String first) {
+		this.first = first == null ? null : first.trim();
+	}
 
-    public void setLast(String last) {
-        this.last = last == null ? null : last.trim();
-    }
+	public String getLast() {
+		return last;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setLast(String last) {
+		this.last = last == null ? null : last.trim();
+	}
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPwd() {
-        return pwd;
-    }
+	public void setEmail(String email) {
+		this.email = email == null ? null : email.trim();
+	}
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd == null ? null : pwd.trim();
-    }
+	public String getPwd() {
+		return pwd;
+	}
 
-    public String getPictureId() {
-        return pictureId;
-    }
+	public void setPwd(String pwd) {
+		this.pwd = pwd == null ? null : pwd.trim();
+	}
 
-    public void setPictureId(String pictureId) {
-        this.pictureId = pictureId == null ? null : pictureId.trim();
-    }
+	public String getPictureId() {
+		return pictureId;
+	}
+
+	public void setPictureId(String pictureId) {
+		this.pictureId = pictureId == null ? null : pictureId.trim();
+	}
+
+	public String getGroups() {
+		return groups;
+	}
+
+	public void setGroups(String groups) {
+		this.groups = groups;
+	}
+
 }

@@ -64,7 +64,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          </label>
                     </div>
                     <div class="am-form-group">
-                        <button type="submit" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">提交</button>
+                        <button type="submit" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">登录</button>
+                        <button type="button" onclick="window.location.href='sign-up.jsp'" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">没有账户？请注册</button>
                     </div>
                 </form>
             </div>

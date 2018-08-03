@@ -61,14 +61,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="am-form-group">
                         <input type="password" class="tpl-form-input" id="user-name" name="repwd" placeholder="再次输入密码" required>
                     </div>
-
-                    <!-- <div class="am-form-group">
-                        <input type="text" class="tpl-form-input" id="user-name" name="post" placeholder="请输入岗位" required>
-                    </div>
-                    
-      				<div class="am-form-group">
-                        <input type="text" class="tpl-form-input" id="user-name" name="system" placeholder="请输入部门" required>
-                    </div> -->
                     
                     <div class="am-form-group">
                         <input type="text" class="tpl-form-input" id="user-name" name="email" placeholder="请输入邮箱" required>

@@ -9,16 +9,16 @@ public interface ActIdUserService {
 
 	public ActIdUser findById(String actuserId);
 
-	public ActIdUser userLogin(ActIdUser actuser);
-
 	public List<ActIdUser> userPage(Map<String, Object> map);
 
 	public int userCount(Map<String, Object> map);
 
-	public int deleteUser(List<String> actuserId);
+	public int deleteUser(String actuserId);
 
 	public int updateUser(ActIdUser actuser);
 
 	public int addUser(ActIdUser actuser);
+
+	public List<ActIdUser> findByLikeId(String actuserId);
 
 }

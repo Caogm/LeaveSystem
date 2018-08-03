@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <ul>
                         <!-- 欢迎语 -->
                         <li class="am-text-sm tpl-header-navbar-welcome">
-                            <a href="javascript:;">欢迎你, <span>${user.name}</span> </a>
+                            <a href="javascript:;">欢迎你, <span>${user.id}</span> </a>
                         </li>
 
                         <!-- 新邮件 -->
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <li class="tpl-dropdown-menu-messages">
                                     <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
                                         <div class="menu-messages-ico">
-                                            <img src="assets/img/user04.png" alt="">
+                                            <img src="assets/img/user.png" alt="">
                                         </div>
                                         <div class="menu-messages-time">
                                             3小时前
@@ -202,7 +202,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-           ${user.name}
+           ${user.id}
           </span>
                     <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
                 </div>
@@ -242,12 +242,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
-                            <a href="user-list.jsp">
+                            <a href="userManage.jsp">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 用户管理
                             </a>
                         </li>
                         <li class="sidebar-nav-link">
-                            <a href="table-edit.jsp">
+                            <a href="userPermission.jsp">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 用户权限管理
                             </a>
                         </li>
@@ -256,7 +256,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 请假
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 请假管理
                         <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
@@ -275,12 +275,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 审批
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 审批管理
                         <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
-                            <a href="Unfinished-task.jsp">
+                            <a href="unfinished-task.jsp">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 待办理任务
                             </a>
                         </li>

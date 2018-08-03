@@ -31,14 +31,40 @@ public class LeaveTableServiceImpl implements LeaveTableService {
 	}
 
 	@Override
-	public List<LeaveTable> queryByName(String uname) {
+	public LeaveTable queryByName(String uname) {
 		LeaveTableExample example = new LeaveTableExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andUnameEqualTo(uname);
+		return (LeaveTable) leaveTableMapper.selectByExample(example);
+	}
+
+	@Override
+	public List<LeaveTable> queryByProcessInstanceId(String ProcessInstanceId) {
+		LeaveTableExample example = new LeaveTableExample();
+		LeaveTableExample.Criteria criteria = example.createCriteria();
+		criteria.andProcessinstanceEqualTo(ProcessInstanceId);
+
+		return leaveTableMapper.selectByExample(example);
+
+	}
+
+	@Override
+	public LeaveTable queryById(Integer id) {
+		// TODO Auto-generated method stub
+
+		return leaveTableMapper.selectByPrimaryKey(id);
+	}
+
+	//请假原因模糊查询
+	@Override
+	public List<LeaveTable> queryByLikeReason(String reason) {
+		LeaveTableExample example = new LeaveTableExample();
+		LeaveTableExample.Criteria criteria = example.createCriteria();
+		criteria.andReasonLike("%" + reason + "%");
 		return leaveTableMapper.selectByExample(example);
 	}
 
-	//模糊查询
+	//请假类型+请假原因模糊查询
 	@Override
 	public List<LeaveTable> queryByStr(String leavetype, String reason) {
 		LeaveTableExample example = new LeaveTableExample();
@@ -55,7 +81,7 @@ public class LeaveTableServiceImpl implements LeaveTableService {
 	@Override
 	public void updateLeaveTable(Integer id, LeaveTable leavetable) {
 		// TODO Auto-generated method stub
-
+		leaveTableMapper.updateByPrimaryKey(leavetable);
 	}
 
 	@Override
@@ -65,12 +91,12 @@ public class LeaveTableServiceImpl implements LeaveTableService {
 	}
 
 	@Override
-	public List<LeaveTable> queryByStr(String leavetype) {
-		LeaveTableExample example = new LeaveTableExample();
-		LeaveTableExample.Criteria criteria = example.createCriteria();
-		criteria.andLeavetypeEqualTo(leavetype);
-
-		return leaveTableMapper.selectByExample(example);
+	public void deleteLeaveTableByUname(String uname) {
+		// TODO Auto-generated method stub
+		LeaveTableExample leaveTableExample = new LeaveTableExample();
+		Criteria criteria = leaveTableExample.createCriteria();
+		criteria.andUnameEqualTo(uname);
+		leaveTableMapper.deleteByExample(leaveTableExample);
 	}
 
 }

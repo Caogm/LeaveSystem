@@ -1,34 +1,30 @@
 package com.leavesystem.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.leavesystem.model.LeaveTable;
 import com.leavesystem.model.LeaveTableExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface LeaveTableMapper {
-	int countByExample(LeaveTableExample example);
+    int countByExample(LeaveTableExample example);
 
-	int deleteByExample(LeaveTableExample example);
+    int deleteByExample(LeaveTableExample example);
 
-	int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id);
 
-	int insert(LeaveTable record);
+    int insert(LeaveTable record);
 
-	int insertSelective(LeaveTable record);
+    int insertSelective(LeaveTable record);
 
-	List<LeaveTable> selectByExample(LeaveTableExample example);
+    List<LeaveTable> selectByExample(LeaveTableExample example);
 
-	LeaveTable selectByPrimaryKey(Integer id);
+    LeaveTable selectByPrimaryKey(Integer id);
 
-	int updateByExampleSelective(@Param("record") LeaveTable record, @Param("example") LeaveTableExample example);
+    int updateByExampleSelective(@Param("record") LeaveTable record, @Param("example") LeaveTableExample example);
 
-	int updateByExample(@Param("record") LeaveTable record, @Param("example") LeaveTableExample example);
+    int updateByExample(@Param("record") LeaveTable record, @Param("example") LeaveTableExample example);
 
-	int updateByPrimaryKeySelective(LeaveTable record);
+    int updateByPrimaryKeySelective(LeaveTable record);
 
-	int updateByPrimaryKey(LeaveTable record);
-
-	List<LeaveTable> queryByKeyWords(String leavetype, String reason);
+    int updateByPrimaryKey(LeaveTable record);
 }

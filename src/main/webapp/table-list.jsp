@@ -28,8 +28,161 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css" />
     <link rel="stylesheet" href="assets/css/app.css">
     <script src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function () {
+			searchleavelist();
+			searchleavelistByLikeReason();
+			audit();
+			deleteleavelist();
+			
+		});
+
+    	//提交审核
+    	function audit() {
+    		$("#audit").click(function(){
+				//判断是否至少选择一项				
+				var checkedNum =$("input[name='ck_order']:checked").length;
+				if(checkedNum==0){
+					alert("请选择一项流程进行提交");
+					return;
+				}
+				if(confirm("确定要提交审核的流程？")){
+					var checkList= new Array();
+					$("input[name='ck_order']:checked").each(function(){
+						checkList.push($(this).val());
+					});
+				$.ajax({
+						type:"POST",
+						url:"leaveController/startLeaveFlow",
+						data:{
+							"orderlist":checkList.toString()
+						},
+						
+						success:function(){
+							$("[name ='ck_order']:checkbox").attr("checked", false); 
+							searchleavelistByLikeReason();
+							alert("提交成功");
+						}
+						
+					}) 
+					
+				}
+			});
+		}
+    	//根据请假理由模糊搜索假单
+    	function searchleavelistByLikeReason(){
+    		$.ajax({
+    			url:"leaveTableController/queryLeaveTableAll",
+    			data:{
+    				reason:$('#reason').val()
+    			},
+    			type:"post",
+    			cache:false,
+    			dataType:"json",
+    			success:function(data){
+    				$("#tbody tr td").remove();//<tbody>的id为tbody,利用remove可以将上次的数据清除
+                    var result=eval(data);//把json数据字符串转换为数组对象
+    	       		 $.each(result,function (index , item ) {
+    	       		//从JS对象中获取属性
+    	       		var uname=item.uname;
+    	       		var reasons=item.reasons;
+    	       		var createtime=item.createtime;
+    	       		var state=item.state;
+    	       		var id=item.id;
+    	       		console.log(id);
+    	       		$("#tbody").append("<tr>"+"<td><input type='checkbox' name='ck_order' value='" + id + "'></td>"
+    	       				 +"<td>"+id+"</td>"+"<td>"+uname+"</td>"
+    	       				 +"<td>"+reasons+"<td>"+createtime+"</td>"+"<td>"+state+"</td>"+"</td>"
+    	       				+"<td><a href='leaveTableController/updateEditLeaveTable?leaveId="+id+"'>修改假单</a></td>"+"</tr>")      				
+    	       		 });
+    			},
+    			error : function() {  
+                    
+                    alert("异常！");  
+               }  
+    		});
+    	}
+    	
+    	//模糊搜索假单列表
+    	function searchleavelist(){
+    	
+    		$.ajax({
+    			url:"leaveTableController/queryLeaveTable",
+    			data:{
+    				reason:$('#reason').val(),
+    				leavetype:$('#leavetype').val() 
+    			},
+    			type:"post",
+    			cache:false,
+    			dataType:"json",
+    			success:function(data){
+    				$("#tbody tr td").remove();//<tbody>的id为tbody,利用remove可以将上次的数据清除
+                    var result=eval(data);//把json数据字符串转换为数组对象
+    	       		 $.each(result,function (index , item ) {
+    	       		//从JS对象中获取属性
+    	       		var uname=item.uname;
+    	       		var reasons=item.reasons;
+    	       		var createtime=item.createtime;
+    	       		var state=item.state;
+    	       		var id=item.id;
+    	       		console.log(id);
+    	       		$("#tbody").append("<tr>"+"<td><input type='checkbox' name='ck_order' value='" + id + "'></td>"
+    	       				 +"<td>"+id+"</td>"+"<td>"+uname+"</td>"
+    	       				 +"<td>"+reasons+"<td>"+createtime+"</td>"+"<td>"+state+"</td>"+"</td>"
+    	       				+"<td><a href='leaveTableController/updateEditLeaveTable?leaveId="+id+"'>修改假单</a></td>"+"</tr>")      				
+    	       		 });
+    			},
+    			error : function() {  
+                    // view("异常！");  
+                    alert("异常！");  
+               }  
+    		});
+    	}
+    	
+    	// 批量删除用户
+    	  function deleteleavelist(){
+    			$("#delete").click(function(){
+    				//判断是否至少选择一项				
+    				var checkedNum =$("input[name='ck_order']:checked").length;
+    				if(checkedNum==0){
+    					alert("请至少选择一项");
+    					return;
+    				}
+    				if(confirm("确定要删除所选项目？")){
+    					var checkList= new Array();
+    					$("input[name='ck_order']:checked").each(function(){
+    						checkList.push($(this).val());
+    					});
+    					$.ajax({
+    						type:"POST",
+    						url:"leaveTableController/deleteLeaveTable",
+    						data:{
+    							"orderlist":checkList.toString()
+    						},
+    						
+    						success:function(){
+    							$("[name ='ck_order']:checkbox").attr("checked", false); 
+    							searchleavelistByLikeReason();
+    							alert("删除成功");
+    						}
+    						
+    					})
+    					
+    				}
+    			});
+    	  	//全选
+    			$("#checked_all").click(function(){
+    				$("input[name='ck_order']").prop("checked",this.checked);
+    			})
+
+    	  }
+    </script>
 </head>
 <body data-type="widgets">
+<%
+	//获得key
+	String key=request.getParameter("key");
+%>
     <script src="assets/js/theme.js"></script>
     <div class="am-g tpl-g">
         <!-- 头部 -->
@@ -58,117 +211,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <ul>
                         <!-- 欢迎语 -->
                         <li class="am-text-sm tpl-header-navbar-welcome">
-                            <a href="javascript:;">欢迎你, <span>${user.name}</span> </a>
-                        </li>
-
-                        <!-- 新邮件 -->
-                        <li class="am-dropdown tpl-dropdown" data-am-dropdown>
-                            <a href="javascript:;" class="am-dropdown-toggle tpl-dropdown-toggle" data-am-dropdown-toggle>
-                                <i class="am-icon-envelope"></i>
-                                <span class="am-badge am-badge-success am-round item-feed-badge">4</span>
-                            </a>
-                            <!-- 弹出列表 -->
-                            <ul class="am-dropdown-content tpl-dropdown-content">
-                                <li class="tpl-dropdown-menu-messages">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
-                                        <div class="menu-messages-ico">
-                                            <img src="assets/img/user04.png" alt="">
-                                        </div>
-                                        <div class="menu-messages-time">
-                                            3小时前
-                                        </div>
-                                        <div class="menu-messages-content">
-                                            <div class="menu-messages-content-title">
-                                                <i class="am-icon-circle-o am-text-success"></i>
-                                                <span>夕风色</span>
-                                            </div>
-                                            <div class="am-text-truncate"> Amaze UI 的诞生，依托于 GitHub 及其他技术社区上一些优秀的资源；Amaze UI 的成长，则离不开用户的支持。 </div>
-                                            <div class="menu-messages-content-time">2016-09-21 下午 16:40</div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li class="tpl-dropdown-menu-messages">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
-                                        <div class="menu-messages-ico">
-                                            <img src="assets/img/user02.png" alt="">
-                                        </div>
-                                        <div class="menu-messages-time">
-                                            5天前
-                                        </div>
-                                        <div class="menu-messages-content">
-                                            <div class="menu-messages-content-title">
-                                                <i class="am-icon-circle-o am-text-warning"></i>
-                                                <span>测试用户</span>
-                                            </div>
-                                            <div class="am-text-truncate"> 为了能最准确的传达所描述的问题， 建议你在反馈时附上演示，方便我们理解。 </div>
-                                            <div class="menu-messages-content-time">2016-09-16 上午 09:23</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="tpl-dropdown-menu-messages">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
-                                        <i class="am-icon-circle-o"></i> 进入列表…
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- 新提示 -->
-                        <li class="am-dropdown" data-am-dropdown>
-                            <a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle>
-                                <i class="am-icon-bell"></i>
-                                <span class="am-badge am-badge-warning am-round item-feed-badge">5</span>
-                            </a>
-
-                            <!-- 弹出列表 -->
-                            <ul class="am-dropdown-content tpl-dropdown-content">
-                                <li class="tpl-dropdown-menu-notifications">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
-                                        <div class="tpl-dropdown-menu-notifications-title">
-                                            <i class="am-icon-line-chart"></i>
-                                            <span> 有6笔新的销售订单</span>
-                                        </div>
-                                        <div class="tpl-dropdown-menu-notifications-time">
-                                            12分钟前
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="tpl-dropdown-menu-notifications">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
-                                        <div class="tpl-dropdown-menu-notifications-title">
-                                            <i class="am-icon-star"></i>
-                                            <span> 有3个来自人事部的消息</span>
-                                        </div>
-                                        <div class="tpl-dropdown-menu-notifications-time">
-                                            30分钟前
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="tpl-dropdown-menu-notifications">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
-                                        <div class="tpl-dropdown-menu-notifications-title">
-                                            <i class="am-icon-folder-o"></i>
-                                            <span> 上午开会记录存档</span>
-                                        </div>
-                                        <div class="tpl-dropdown-menu-notifications-time">
-                                            1天前
-                                        </div>
-                                    </a>
-                                </li>
-
-
-                                <li class="tpl-dropdown-menu-notifications">
-                                    <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
-                                        <i class="am-icon-bell"></i> 进入列表…
-                                    </a>
-                                </li>
-                            </ul>
+                            <a href="javascript:;">欢迎你, <span>${user.id}</span> </a>
                         </li>
 
                         <!-- 退出 -->
                         <li class="am-text-sm">
-                            <a href="javascript:;">
+                            <a href="actIdUserController/logout">
                                 <span class="am-icon-sign-out"></span> 退出
                             </a>
                         </li>
@@ -197,11 +245,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="tpl-sidebar-user-panel">
                 <div class="tpl-user-panel-slide-toggleable">
                     <div class="tpl-user-panel-profile-picture">
-                        <img src="assets/img/user04.png" alt="">
+                        <img src="assets/img/user.png" alt="">
                     </div>
                     <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-            ${user.name}
+            ${user.id}
           </span>
                     <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
                 </div>
@@ -241,12 +289,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
-                            <a href="user-list.jsp">
+                            <a href="userManage.jsp">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 用户管理
                             </a>
                         </li>
                         <li class="sidebar-nav-link">
-                            <a href="table-edit.jsp">
+                            <a href="userPermission.jsp">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 用户权限管理
                             </a>
                         </li>
@@ -255,7 +303,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 请假
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 请假管理
                         <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
@@ -274,12 +322,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="javascript:;" class="sidebar-nav-sub-title">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 审批
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 审批管理
                         <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
-                            <a href="Unfinished-task.jsp">
+                            <a href="unfinished-task.jsp">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 待办理任务
                             </a>
                         </li>
@@ -293,7 +341,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li class="sidebar-nav-link">
                     <a href="sign-up.jsp">
                         <i class="am-icon-clone sidebar-nav-link-logo"></i> 注册
-                        <span class="am-badge am-badge-secondary sidebar-nav-link-logo-ico am-round am-fr am-margin-right-sm">6</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
@@ -330,18 +377,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
                                                 <button type="button" class="am-btn am-btn-default am-btn-success" onclick="window.open('table-edit.jsp')"><span class="am-icon-plus"></span> 新增</button>
-                                                
-                                                
+												<button type="button" id="audit" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 提交审核</button>
+												<button type="button" id="delete" class="am-btn am-btn-default am-btn-danger" ><span class="am-icon-trash-o"></span> 删除</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                              
-                                <form action="leaveTableController/queryLeaveTable" method="post">
-                                
                                 <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
                                     <div class="am-form-group tpl-table-list-select">
-                                        <select name="leavetype" data-am-selected="{btnSize: 'sm'}">
+                                        <select id="leavetype" data-am-selected="{btnSize: 'sm'}">
                                               <option value="option1">请假类型</option>
                                               <option value="option2">年假</option>
                                               <option value="option3">事假</option>
@@ -353,44 +398,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 
                                 <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
                                     <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-                                        <input type="text" class="am-form-field " name="reason" value="">
+                                        <input type="text" class="am-form-field " id="reason" name="reason">
                                         <span class="am-input-group-btn">
-                                            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" type="submit"></button>
+                                            <button  class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" onclick="searchleavelist()"></button>
                                         </span>
                                     </div>
                                 </div>
-                                <input type="submit">
-                                </form>
                                 
                                 <div class="am-u-sm-12">
                                     <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
                                         <thead>
-                                            <tr>
-                                                <th>请假原因</th>
+                                            <tr id="tr">
+                                            	<th ><input type="checkbox"  name="checked_all" ></th>
+                                                <th>请假单ID</th>
                                                 <th>请假申请人</th>
+                                                <th>请假原因</th>
                                                 <th>时间</th>
+                                                <th>当前状态</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        	<c:forEach items="${leaveTablesList}" var="leaveTable">
-                                            <tr class="gradeX">
-                                                <td>${leaveTable.reason}</td>
-                                                <td>${leaveTable.uname}</td>
-                                                <td><fmt:formatDate value="${leaveTable.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                                <td>
-                                                    <div class="tpl-table-black-operation">
-                                                        <a href="leaveTableController/updateLeaveTable?id=${leaveTable.id}">
-                                                            <i class="am-icon-pencil"></i> 编辑
-                                                        </a>
-                                                        <a href="leaveTableController/deleteLeaveTable?id=${leaveTable.id}" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 删除
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                           </c:forEach> 
-                                            <!-- more data -->
+                                        <tbody id="tbody">
+
                                         </tbody>
                                     </table>
                                 </div>

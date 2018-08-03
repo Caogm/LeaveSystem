@@ -7,11 +7,13 @@
     <result column="uname" property="uname" jdbcType="VARCHAR" />
     <result column="upost" property="upost" jdbcType="VARCHAR" />
     <result column="usys" property="usys" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="leavetype" property="leavetype" jdbcType="VARCHAR" />
     <result column="reason" property="reason" jdbcType="VARCHAR" />
     <result column="leavetime" property="leavetime" jdbcType="VARCHAR" />
     <result column="backtime" property="backtime" jdbcType="VARCHAR" />
+    <result column="leavedays" property="leavedays" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="processInstance" property="processinstance" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -73,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, uid, uname, upost, usys, phone, leavetype, reason, leavetime, backtime, createtime
+    id, uid, uname, upost, usys, leavetype, reason, leavetime, backtime, leavedays, state, 
+    processInstance, createtime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.leavesystem.model.LeaveTableExample" >
     select
@@ -95,12 +98,6 @@
     from leave_table
     where id = #{id,jdbcType=INTEGER}
   </select>
-  
-  <select id="queryByKeyWords" parameterType="com.leavesystem.model.LeaveTableExample">
-  	select * from leave_table where reason like '%' #{reason} '%' and leavetype = #{leavetype}
-  </select>
-  
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from leave_table
     where id = #{id,jdbcType=INTEGER}
@@ -113,13 +110,15 @@
   </delete>
   <insert id="insert" parameterType="com.leavesystem.model.LeaveTable" >
     insert into leave_table (id, uid, uname, 
-      upost, usys, phone, 
-      leavetype, reason, leavetime, 
-      backtime, createtime)
+      upost, usys, leavetype, 
+      reason, leavetime, backtime, 
+      leavedays, state, processInstance, 
+      createtime)
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, 
-      #{upost,jdbcType=VARCHAR}, #{usys,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{leavetype,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{leavetime,jdbcType=VARCHAR}, 
-      #{backtime,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+      #{upost,jdbcType=VARCHAR}, #{usys,jdbcType=VARCHAR}, #{leavetype,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{leavetime,jdbcType=VARCHAR}, #{backtime,jdbcType=VARCHAR}, 
+      #{leavedays,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{processinstance,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.leavesystem.model.LeaveTable" >
     insert into leave_table
@@ -139,9 +138,6 @@
       <if test="usys != null" >
         usys,
       </if>
-      <if test="phone != null" >
-        phone,
-      </if>
       <if test="leavetype != null" >
         leavetype,
       </if>
@@ -153,6 +149,15 @@
       </if>
       <if test="backtime != null" >
         backtime,
+      </if>
+      <if test="leavedays != null" >
+        leavedays,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="processinstance != null" >
+        processInstance,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -174,9 +179,6 @@
       <if test="usys != null" >
         #{usys,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
       <if test="leavetype != null" >
         #{leavetype,jdbcType=VARCHAR},
       </if>
@@ -188,6 +190,15 @@
       </if>
       <if test="backtime != null" >
         #{backtime,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedays != null" >
+        #{leavedays,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="processinstance != null" >
+        #{processinstance,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
@@ -218,9 +229,6 @@
       <if test="record.usys != null" >
         usys = #{record.usys,jdbcType=VARCHAR},
       </if>
-      <if test="record.phone != null" >
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
       <if test="record.leavetype != null" >
         leavetype = #{record.leavetype,jdbcType=VARCHAR},
       </if>
@@ -232,6 +240,15 @@
       </if>
       <if test="record.backtime != null" >
         backtime = #{record.backtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leavedays != null" >
+        leavedays = #{record.leavedays,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processinstance != null" >
+        processInstance = #{record.processinstance,jdbcType=VARCHAR},
       </if>
       <if test="record.createtime != null" >
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -248,11 +265,13 @@
       uname = #{record.uname,jdbcType=VARCHAR},
       upost = #{record.upost,jdbcType=VARCHAR},
       usys = #{record.usys,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
       leavetype = #{record.leavetype,jdbcType=VARCHAR},
       reason = #{record.reason,jdbcType=VARCHAR},
       leavetime = #{record.leavetime,jdbcType=VARCHAR},
       backtime = #{record.backtime,jdbcType=VARCHAR},
+      leavedays = #{record.leavedays,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      processInstance = #{record.processinstance,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -273,9 +292,6 @@
       <if test="usys != null" >
         usys = #{usys,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
       <if test="leavetype != null" >
         leavetype = #{leavetype,jdbcType=VARCHAR},
       </if>
@@ -287,6 +303,15 @@
       </if>
       <if test="backtime != null" >
         backtime = #{backtime,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedays != null" >
+        leavedays = #{leavedays,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="processinstance != null" >
+        processInstance = #{processinstance,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -300,11 +325,13 @@
       uname = #{uname,jdbcType=VARCHAR},
       upost = #{upost,jdbcType=VARCHAR},
       usys = #{usys,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
       leavetype = #{leavetype,jdbcType=VARCHAR},
       reason = #{reason,jdbcType=VARCHAR},
       leavetime = #{leavetime,jdbcType=VARCHAR},
       backtime = #{backtime,jdbcType=VARCHAR},
+      leavedays = #{leavedays,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      processInstance = #{processinstance,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

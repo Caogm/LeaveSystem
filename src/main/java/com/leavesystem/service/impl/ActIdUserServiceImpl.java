@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.leavesystem.mapper.ActIdUserMapper;
 import com.leavesystem.model.ActIdUser;
+import com.leavesystem.model.ActIdUserExample;
+import com.leavesystem.model.ActIdUserExample.Criteria;
 import com.leavesystem.service.ActIdUserService;
 
 @Service("actIdUserServiceImpl")
@@ -35,12 +37,6 @@ public class ActIdUserServiceImpl implements ActIdUserService {
 	}
 
 	@Override
-	public ActIdUser userLogin(ActIdUser actuser) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<ActIdUser> userPage(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return null;
@@ -53,15 +49,25 @@ public class ActIdUserServiceImpl implements ActIdUserService {
 	}
 
 	@Override
-	public int deleteUser(List<String> actuserId) {
+	public int deleteUser(String actuserId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return actIdUserMapper.deleteByPrimaryKey(actuserId);
 	}
 
 	@Override
 	public int updateUser(ActIdUser actuser) {
 		// TODO Auto-generated method stub
-		return 0;
+		return actIdUserMapper.updateByPrimaryKey(actuser);
+	}
+
+	//使用用户名进行模糊查询
+	@Override
+	public List<ActIdUser> findByLikeId(String actuserId) {
+		ActIdUserExample actIdUserExample = new ActIdUserExample();
+		Criteria criteria = actIdUserExample.createCriteria();
+		criteria.andIdLike("%" + actuserId + "%");
+		List<ActIdUser> actIdUsers = actIdUserMapper.selectByExample(actIdUserExample);
+		return actIdUsers;
 	}
 
 }

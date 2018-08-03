@@ -445,76 +445,6 @@ public class LeaveTableExample {
             return (Criteria) this;
         }
 
-        public Criteria andPhoneIsNull() {
-            addCriterion("phone is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneIsNotNull() {
-            addCriterion("phone is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneEqualTo(String value) {
-            addCriterion("phone =", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneNotEqualTo(String value) {
-            addCriterion("phone <>", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneGreaterThan(String value) {
-            addCriterion("phone >", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneGreaterThanOrEqualTo(String value) {
-            addCriterion("phone >=", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneLessThan(String value) {
-            addCriterion("phone <", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneLessThanOrEqualTo(String value) {
-            addCriterion("phone <=", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneLike(String value) {
-            addCriterion("phone like", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneNotLike(String value) {
-            addCriterion("phone not like", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneIn(List<String> values) {
-            addCriterion("phone in", values, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneNotIn(List<String> values) {
-            addCriterion("phone not in", values, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneBetween(String value1, String value2) {
-            addCriterion("phone between", value1, value2, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneNotBetween(String value1, String value2) {
-            addCriterion("phone not between", value1, value2, "phone");
-            return (Criteria) this;
-        }
-
         public Criteria andLeavetypeIsNull() {
             addCriterion("leavetype is null");
             return (Criteria) this;
@@ -792,6 +722,216 @@ public class LeaveTableExample {
 
         public Criteria andBacktimeNotBetween(String value1, String value2) {
             addCriterion("backtime not between", value1, value2, "backtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysIsNull() {
+            addCriterion("leavedays is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysIsNotNull() {
+            addCriterion("leavedays is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysEqualTo(String value) {
+            addCriterion("leavedays =", value, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysNotEqualTo(String value) {
+            addCriterion("leavedays <>", value, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysGreaterThan(String value) {
+            addCriterion("leavedays >", value, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysGreaterThanOrEqualTo(String value) {
+            addCriterion("leavedays >=", value, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysLessThan(String value) {
+            addCriterion("leavedays <", value, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysLessThanOrEqualTo(String value) {
+            addCriterion("leavedays <=", value, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysLike(String value) {
+            addCriterion("leavedays like", value, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysNotLike(String value) {
+            addCriterion("leavedays not like", value, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysIn(List<String> values) {
+            addCriterion("leavedays in", values, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysNotIn(List<String> values) {
+            addCriterion("leavedays not in", values, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysBetween(String value1, String value2) {
+            addCriterion("leavedays between", value1, value2, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andLeavedaysNotBetween(String value1, String value2) {
+            addCriterion("leavedays not between", value1, value2, "leavedays");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIsNull() {
+            addCriterion("state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIsNotNull() {
+            addCriterion("state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateEqualTo(String value) {
+            addCriterion("state =", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotEqualTo(String value) {
+            addCriterion("state <>", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThan(String value) {
+            addCriterion("state >", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThanOrEqualTo(String value) {
+            addCriterion("state >=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThan(String value) {
+            addCriterion("state <", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThanOrEqualTo(String value) {
+            addCriterion("state <=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLike(String value) {
+            addCriterion("state like", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotLike(String value) {
+            addCriterion("state not like", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIn(List<String> values) {
+            addCriterion("state in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotIn(List<String> values) {
+            addCriterion("state not in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateBetween(String value1, String value2) {
+            addCriterion("state between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotBetween(String value1, String value2) {
+            addCriterion("state not between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceIsNull() {
+            addCriterion("processInstance is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceIsNotNull() {
+            addCriterion("processInstance is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceEqualTo(String value) {
+            addCriterion("processInstance =", value, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceNotEqualTo(String value) {
+            addCriterion("processInstance <>", value, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceGreaterThan(String value) {
+            addCriterion("processInstance >", value, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceGreaterThanOrEqualTo(String value) {
+            addCriterion("processInstance >=", value, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceLessThan(String value) {
+            addCriterion("processInstance <", value, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceLessThanOrEqualTo(String value) {
+            addCriterion("processInstance <=", value, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceLike(String value) {
+            addCriterion("processInstance like", value, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceNotLike(String value) {
+            addCriterion("processInstance not like", value, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceIn(List<String> values) {
+            addCriterion("processInstance in", values, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceNotIn(List<String> values) {
+            addCriterion("processInstance not in", values, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceBetween(String value1, String value2) {
+            addCriterion("processInstance between", value1, value2, "processinstance");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessinstanceNotBetween(String value1, String value2) {
+            addCriterion("processInstance not between", value1, value2, "processinstance");
             return (Criteria) this;
         }
 
